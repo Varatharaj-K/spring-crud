@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class EntityController {
             @ApiResponse(responseCode = "400", description = "Invalid input data")
     })
     @PostMapping("/")
-    public ResponseEntity<?> addEntity(@RequestBody EntityDTO entityDTO)throws ValidationException {
+    public ResponseEntity<?> addEntity(@Valid @RequestBody EntityDTO entityDTO)throws ValidationException {
         logger.info("Received request to add Entity: {}", entityDTO);
         Entity entity = entityService.addEntity(entityDTO);
         logger.info("Entity created successfully");
@@ -105,7 +106,7 @@ public class EntityController {
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEntity(@PathVariable Long id,@RequestBody EntityDTO entityDTO)throws ValidationException {
+    public ResponseEntity<?> updateEntity(@PathVariable Long id, @Valid @RequestBody EntityDTO entityDTO)throws ValidationException {
         logger.info("Received request to update Entity with id: {}", id);
         entityService.updateEntity(id, entityDTO);
         logger.info("Entity with id {} updated successfully", id);

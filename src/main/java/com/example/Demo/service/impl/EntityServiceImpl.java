@@ -134,7 +134,7 @@ public class EntityServiceImpl implements EntityService {
             logger.info("Entity with ID {} deleted successfully", id);
         } else {
             logger.warn("Entity with ID {} not found", id);
-            throw new IllegalArgumentException("Entity not found with ID: " + id);  // Throwing a standard exception
+            throw new IllegalArgumentException("Entity not found with ID: " + id);
         }
     }
 
